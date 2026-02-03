@@ -1,0 +1,33 @@
+cancel			Cancel a download that's in-progress
+cd			Change directory
+clear			Clear beacon queue
+connect			Connect to a Beacon peer over TCP
+cp			Copy a file
+dllload			Load DLL into a process with LoadLibrary()
+download		Download a file
+downloads		Lists file downloads in progress
+drives			List drives on target
+execute			Execute a program on target (no output)
+exit			Terminate the beacon session
+getsystem		Attempt to get SYSTEM
+history			Show the command history
+help			Help menu
+inline-execute		Run a Beacon Object File in this session
+kerberos_ticket_purge	Purge kerberos tickets from this session
+kerberos_ticket_use	Apply kerberos ticket to this session
+kill			Kill a process
+ls			List files
+mimikatz		Runs a mimikatz command
+mkdir			Make a directory
+mv			Move a file
+note			Assign a note to this Beacon
+ps			Show process list
+pwd			Print current directory
+reg			Query the registry
+rm			Remove a file or folder
+run			Execute a program on target (returns output)
+shell			Execute a command via cmd.exe
+sleep			Set beacon sleep time
+timestomp		Apply timestamps from one file to another
+upload			Upload a file
+!			Run a command from the history
